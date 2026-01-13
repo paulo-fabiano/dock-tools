@@ -1,0 +1,11 @@
+## Build
+
+```bash
+docker build -t debug  -f Dockerfile-Jenkins .
+```
+
+## Execução
+
+```bash
+docker run -v /var/run/docker.sock:/var/run/docker.sock --rm -u debug -it debug:latest sh
+```
