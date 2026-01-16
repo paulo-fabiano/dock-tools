@@ -29,6 +29,7 @@ pipeline {
     agent {
         docker { 
             image 'paulofabianoo/ci:latest'
+            args  '--privileged'
         }
     }
 
