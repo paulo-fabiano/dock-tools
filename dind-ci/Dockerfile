@@ -8,9 +8,3 @@ RUN curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/
 RUN mkdir -p /etc/trivy/templates
 
 COPY trivy/templates/html.tpl /etc/trivy/templates/html.tpl
-
-RUN addgroup -S ci && adduser -S ci -G ci
-
-RUN chown ci:ci /etc/trivy/templates/html.tpl
-
-USER ci
