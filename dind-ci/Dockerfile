@@ -1,9 +1,7 @@
-FROM alpine:3.23.0
+FROM docker:rc-dind
 
 RUN apk add --no-cache \
-        docker-cli \
-        curl \
-        git
+        curl
 
 RUN curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh -s -- -b /usr/local/bin v0.68.2
 
@@ -11,10 +9,8 @@ RUN mkdir -p /etc/trivy/templates
 
 COPY trivy/templates/html.tpl /etc/trivy/templates/html.tpl
 
-RUN addgroup -S debug && adduser -S debug -G debug
+RUN addgroup -S ci && adduser -S ci -G ci
 
-RUN chown debug:debug /etc/trivy/templates/html.tpl
+RUN chown ci:ci /etc/trivy/templates/html.tpl
 
-USER debug
-
-CMD [ "sleep", "9999999999" ]
+USER ci
