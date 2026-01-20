@@ -1,6 +1,7 @@
 #!/bin/sh
 # Start the Docker daemon in the background
-dockerd-entrypoint.sh &
+unset DOCKER_HOST
+dockerd &
 
 # Wait for the Docker daemon to be ready
 until docker info >/dev/null 2>&1; do
