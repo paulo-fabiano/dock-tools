@@ -1,9 +1,5 @@
 FROM docker:rc-dind
 
-RUN unset DOCKER_HOST
-
-RUN dockerd &
-
 RUN apk add --no-cache \
         curl
 
@@ -12,3 +8,5 @@ RUN curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/
 RUN mkdir -p /etc/trivy/templates
 
 COPY trivy/templates/html.tpl /etc/trivy/templates/html.tpl
+
+ENTRYPOINT ["unset DOCKER_HOST", "&", "dockerd"]
