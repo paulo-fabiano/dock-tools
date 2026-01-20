@@ -1,5 +1,9 @@
 FROM docker:rc-dind
 
+RUN unset DOCKER_HOST
+
+RUN dockerd &
+
 RUN apk add --no-cache \
         curl
 
